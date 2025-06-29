@@ -1,7 +1,6 @@
 [package]
-name = "core"
+name = "mentis-tensor"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-backend = { path = "../backend" }
