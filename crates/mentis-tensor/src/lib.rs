@@ -21,10 +21,3 @@ impl Tensor {
         Tensor { data, rows, cols }
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    fn matmul_tensor_test() {}
-}

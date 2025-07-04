@@ -8,7 +8,7 @@ pub enum GraphError {
     NodeCreationFailed,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Graph {
     nodes: Vec<Node>,
     nb_input: usize,
@@ -29,6 +29,10 @@ impl Graph {
             nodes: Vec::new(),
             nb_input: 0,
         }
+    }
+
+    pub fn nodes(&self) -> Vec<Node> {
+        self.nodes.clone()
     }
 
     pub fn add_node(&mut self) -> Result<&mut Node, GraphError> {

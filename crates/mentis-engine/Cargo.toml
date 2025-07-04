@@ -1,0 +1,13 @@
+[package]
+name = "mentis-engine"
+edition = "2024"
+version.workspace = true
+authors.workspace = true
+description.workspace = true
+documentation.workspace = true
+
+[dependencies]
+mentis-fusion = { path = "../mentis-fusion" }
+mentis-ops = { path = "../mentis-ops" }
+thiserror.workspace = true
+once_cell = "1.21.3"

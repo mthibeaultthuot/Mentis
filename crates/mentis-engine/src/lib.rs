@@ -1,0 +1,46 @@
+use mentis_fusion::graph::Graph;
+use mentis_ops::Op;
+use once_cell::sync::Lazy;
+use std::sync::Mutex;
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum EngineError {
+    #[error("Add op failed")]
+    AddOP,
+}
+
+#[derive(Debug)]
+pub struct Engine {
+    graph: Graph,
+}
+
+impl Engine {
+    pub fn new() -> Self {
+        Self {
+            graph: Graph::new(),
+        }
+    }
+
+    pub fn graph(&self) -> Graph {
+        self.graph.clone()
+    }
+
+    pub fn add_op(&mut self, op: Op, nb_inputs: i32) -> Result<(), EngineError> {
+        let new_node = match self.graph.add_node() {
+            Ok(node) => node,
+            Err(_) => return Err(EngineError::AddOP),
+        };
+
+        let iter = 0..nb_inputs;
+        iter.for_each(|_| {
+            new_node.add_input();
+        });
+        Ok(())
+    }
+}
+
+pub static ENGINE: Lazy<Mutex<Engine>> = Lazy::new(|| {
+    let engine = Engine::new();
+    Mutex::new(engine)
+});
