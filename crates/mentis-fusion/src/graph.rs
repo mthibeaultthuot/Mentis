@@ -35,8 +35,8 @@ impl Graph {
         self.nodes.clone()
     }
 
-    pub fn add_node(&mut self) -> Result<&mut Node, GraphError> {
-        let node = Node::new(self.get_next_node_id(), Op::Add);
+    pub fn add_node(&mut self, op: Op) -> Result<&mut Node, GraphError> {
+        let node = Node::new(self.get_next_node_id(), op);
         self.nodes.push(node);
 
         match self.nodes.last_mut() {
@@ -67,8 +67,10 @@ impl Node {
         self.op
     }
 
-    pub fn add_input(&mut self) {
-        self.inputs
-            .push(String::from(format!("data{:?}", self.inputs.len() + 1)));
+    pub fn add_input(&mut self) -> &String {
+        let string_input = String::from(format!("data{:?}", self.inputs.len() + 1));
+
+        self.inputs.push(string_input);
+        self.inputs.last().expect("string input")
     }
 }

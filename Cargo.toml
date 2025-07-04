@@ -27,3 +27,4 @@ thiserror = "2.0.12"
 mentis-fusion = { path = "crates/mentis-fusion" }
 mentis-ops = { path = "crates/mentis-ops" }
 mentis-engine = { path = "crates/mentis-engine" }
+mentis-tensor = { path = "crates/mentis-tensor" }

@@ -1,5 +1,17 @@
-#[derive(Debug)]
+use mentis_engine::get_engine;
+use mentis_engine::EngineError;
+use mentis_ops::Op;
+use thiserror::Error;
 
+#[derive(Error, Debug)]
+pub enum TensorError {
+    #[error("Op error for tensor")]
+    OperationFailed,
+    #[error("Engine failed in tensor")]
+    Engine(#[from] EngineError),
+}
+
+#[derive(Debug)]
 pub struct Tensor {
     pub data: Vec<f32>,
     pub rows: usize,
@@ -19,5 +31,16 @@ impl Tensor {
     pub fn new_increment(rows: usize, cols: usize, fill_fn: impl Fn(usize) -> f32) -> Self {
         let data = (0..rows * cols).map(fill_fn).collect();
         Tensor { data, rows, cols }
+    }
+
+    pub fn add(&self, t2: &Tensor) -> Result<(), TensorError> {
+        let mut engine = get_engine()?;
+
+        let _ = engine.add_op(
+            Op::Add,
+            vec![self.data.as_ptr() as usize, t2.data.as_ptr() as usize],
+        )?;
+
+        Ok(())
     }
 }

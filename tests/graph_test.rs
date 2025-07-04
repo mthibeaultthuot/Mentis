@@ -4,7 +4,7 @@ use mentis_ops::Op;
 #[test]
 fn graph_new() {
     let mut graph = graph::Graph::new();
-    let node = graph.add_node().unwrap();
+    let node = graph.add_node(Op::Add).unwrap();
     node.add_input();
     node.add_input();
 
