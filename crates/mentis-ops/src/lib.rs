@@ -1,6 +1,12 @@
-use mentis_macros::Kernel;
+use mentis_macros::kernel;
 
-#[Kernel]
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum Op {
+    Add,
+    Matmul,
+}
+
+#[kernel]
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
 }

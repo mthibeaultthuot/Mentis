@@ -1,6 +1,28 @@
+[package]
+name = "mentis"
+version = "0.1.0"
+edition = "2021"
 
+[workspace.package]
+version = "1.0.0"
+authors = ["Mathieu Thibeault-Thuot"]
+description = "A blazingly fast, educational-first deep learning framework for students and researchers"
+documentation = "https://mentis.veemdigital.com" # not yet
 
 
 [workspace]
 resolver = "3"
-members = ["crates/backend", "crates/core", "crates/runtime", "crates/tensor"]
+members = [ "crates/mentis-backend", "crates/mentis-compiler", "crates/mentis-core", "crates/mentis-fusion", "crates/mentis-macros", "crates/mentis-ops", "crates/mentis-runtime", "crates/mentis-tensor"]
+
+
+[workspace.dependencies]
+anyhow = "1.0.98"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+thiserror = "2.0.12"
+
+
+
+[dependencies]
+mentis-fusion = { path = "crates/mentis-fusion" }
+mentis-ops = { path = "crates/mentis-ops" }

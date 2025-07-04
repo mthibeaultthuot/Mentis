@@ -1,5 +1,4 @@
 use proc_macro::TokenStream;
-use proc_macro2::Span;
 use quote::quote;
 use syn::parse_macro_input;
 use syn::ItemFn;
@@ -7,7 +6,7 @@ use syn::ItemFn;
 extern crate proc_macro;
 
 #[proc_macro_attribute]
-pub fn Kernel(_attr: TokenStream, item: TokenStream) -> TokenStream {
+pub fn kernel(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let func = parse_macro_input!(item as ItemFn);
     let func_ident_string = &func.sig.ident.to_string();
     let mut func_chars = func_ident_string.chars();
