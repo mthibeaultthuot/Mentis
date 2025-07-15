@@ -1,7 +1,14 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class LazyGraph:
-    """Graph implentation"""
+    """Graph dsl implentation"""
 
     curr_id = 0
+    # keep track of the tensor like an id
+    data_id = 0
+    output_id = 0
 
     def __init__(self):
         LazyGraph.curr_id += 1
@@ -9,12 +16,24 @@ class LazyGraph:
         self.nodes = []
 
     def add_node(self, op, shape, dtype):
-        return self.nodes.append(Node(op, shape, dtype))
+        node = Node(op, shape, dtype)
+        self.nodes.append(node)
+        return node
+
+    @staticmethod
+    def get_next_data_id():
+        LazyGraph.data_id += 1
+        return LazyGraph.data_id
+
+    def get_next_output_id():
+        LazyGraph.data_id += 1
+        return LazyGraph.data_id
 
     def __repr__(self):
         return f"LazyGraph(id={self.id}, nodes={self.nodes})"
 
 
+@dataclass
 class Node:
     def __init__(self, op, shape, dtype):
         self.op = op
@@ -23,10 +42,15 @@ class Node:
         self.inputs = []
         self.outputs = []
 
-    def add_input(input_id):
-        self.inputs.append(input_id)
+    def add_input(self):
+        id = f"data{LazyGraph.get_next_data_id()}"
+        self.inputs.append(id)
+        return id
 
-    def add_ouput(output_id):
+    def add_input_from_id(self, id):
+        self.inputs.append(id)
+
+    def add_ouput(self):
         self.outputs.append(output_id)
 
     def __repr__(self):
@@ -34,7 +58,3 @@ class Node:
 
 
 graph = LazyGraph()
-
-
-graph.add_node("input", [10, 10], "float32")
-print(graph)
