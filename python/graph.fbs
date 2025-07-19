@@ -1,0 +1,20 @@
+
+namespace Mentis;
+
+enum DType : byte { FLOAT32 = 0, INT32 = 1 }
+
+table Node {
+  op: string;
+  shape: [int];
+  dtype: DType;
+  inputs: [string];
+  outputs: [string];
+}
+
+table Graph {
+  id: string;
+  nodes: [Node];
+}
+
+root_type Graph;
+
