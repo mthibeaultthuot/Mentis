@@ -1,3 +1,44 @@
+
+# python
 mentis/__pycache__
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.python-version
+*.so
+*.dylib
+*.pyd
+build/
+dist/
+*.spec
+*.env
+mentis/.env
 
 
+
+# rust
+target/
+debug/
+
+**/*.rs.bk
+
+*.pdb
+
+
+# cpp 
+cpp-backend/src/backend/metal-cpp/
+**/.DS_STORE
+
+**/build/
+**/.a
+**/.air
+**/.metallib
+
+
+
+
+
+2
+2

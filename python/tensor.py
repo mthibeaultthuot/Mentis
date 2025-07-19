@@ -32,6 +32,9 @@ class Tensor:
         node.add_input_from_id(self.id)
         return self
 
+    def realize(self):
+        print("realize")
+
     def __repr__(self):
         return f"Tensor(shape={self.shape}, dtype={self.dtype})"
 
@@ -40,4 +43,15 @@ t1 = Tensor([10, 10], dtype="float32")
 t2 = Tensor([10, 10], dtype="float32")
 t3 = t1 @ t2
 t2.elu().elu()
-print(graph)
+
+import time
+
+import core_cpp
+
+startt = time.time()
+print(core_cpp.add(1, 2))
+print(f"Time taken: {(time.time() - startt) * 1000:.3f} ms")
+
+
+e = core_cpp.Engine()
+print(e.add(3, 4))

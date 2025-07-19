@@ -1,3 +1,4 @@
+import json
 from dataclasses import dataclass
 
 
@@ -29,6 +30,15 @@ class LazyGraph:
         LazyGraph.data_id += 1
         return LazyGraph.data_id
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "nodes": [node.to_dict() for node in self.nodes],
+        }
+
+    def to_json(self):
+        return json.dumps(self.to_dict(), indent=2)
+
     def __repr__(self):
         return f"LazyGraph(id={self.id}, nodes={self.nodes})"
 
@@ -55,6 +65,15 @@ class Node:
 
     def __repr__(self):
         return f"Node(op={self.op}, shape={self.shape}, dtype={self.dtype}, inputs={self.inputs}, outputs={self.outputs})"
+
+    def to_dict(self):
+        return {
+            "op": self.op,
+            "shape": self.shape,
+            "dtype": self.dtype,
+            "inputs": self.inputs,
+            "outputs": self.outputs,
+        }
 
 
 graph = LazyGraph()
