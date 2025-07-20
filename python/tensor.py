@@ -15,14 +15,14 @@ class Tensor:
         node = graph.add_node("matmul", self.shape, self.dtype)
         node.add_input_from_id(self.id)
         node.add_input_from_id(tensor.id)
-        self.id = node.add_input()
+        self.id = node.add_output()
         return self
 
     def __add__(self, tensor: "Tensor"):
         node = graph.add_node("add", self.shape, self.dtype)
         node.add_input_from_id(self.id)
         node.add_input_from_id(tensor.id)
-        self.id = node.add_input()
+        self.id = node.add_output()
         return self
 
     def relu(self):
@@ -45,10 +45,12 @@ class Tensor:
         return f"Tensor(shape={self.shape}, dtype={self.dtype})"
 
 
-t1 = Tensor([10, 10], dtype="int32")
+t1 = Tensor([10, 10], dtype="float32")
 t2 = Tensor([10, 10], dtype="float32")
 t3 = t1 @ t2
-t4 = t2.elu().elu()
+t4 = Tensor([10, 10], dtype="float32")
+t5 = t3 + t4
+t6 = t2.elu().elu()
 
 print(graph)
-t3.realize()
+t6.realize()
