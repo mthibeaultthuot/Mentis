@@ -4,4 +4,7 @@
 
 class DType(object):
     FLOAT32 = 0
-    INT32 = 1
+    FLOAT64 = 1
+    INT32 = 2
+    INT64 = 3
+    BOOL = 4

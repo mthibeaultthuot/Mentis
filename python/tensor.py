@@ -33,7 +33,7 @@ class Tensor:
 
     def elu(self):
         node = graph.add_node("elu", self.shape, self.dtype)
-        node.add_input_from_id(self.id)
+        # node.add_input_from_id(self.id)
         self.id = node.add_input()
         return self
 
@@ -45,7 +45,7 @@ class Tensor:
         return f"Tensor(shape={self.shape}, dtype={self.dtype})"
 
 
-t1 = Tensor([10, 10], dtype="float32")
+t1 = Tensor([10, 10], dtype="int32")
 t2 = Tensor([10, 10], dtype="float32")
 t3 = t1 @ t2
 t4 = t2.elu().elu()

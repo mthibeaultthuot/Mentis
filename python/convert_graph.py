@@ -28,7 +28,13 @@ def lazygraph_to_flatbuffer(graph):
 
         shape_vec = builder.CreateNumpyVector(np.array(node.shape, dtype=np.int32))
 
-        dtype_map = {"float32": fd.DType.FLOAT32, "int32": fd.DType.INT32}
+        dtype_map = {
+            "float32": fd.DType.FLOAT32,
+            "float64": fd.DType.FLOAT64,
+            "int32": fd.DType.INT32,
+            "int64": fd.DType.INT64,
+            "bool": fd.DType.BOOL,
+        }
         dtype_enum = dtype_map[node.dtype]
 
         fn.NodeStart(builder)

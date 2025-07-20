@@ -1,7 +1,7 @@
 
 namespace Mentis;
 
-enum DType : byte { FLOAT32 = 0, INT32 = 1 }
+enum DType : byte { FLOAT32 = 0, FLOAT64 = 1, INT32 = 2, INT64 = 3, BOOL = 4 }
 
 table Node {
   op: string;

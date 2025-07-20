@@ -23,30 +23,39 @@ struct GraphBuilder;
 
 enum DType : int8_t {
   DType_FLOAT32 = 0,
-  DType_INT32 = 1,
+  DType_FLOAT64 = 1,
+  DType_INT32 = 2,
+  DType_INT64 = 3,
+  DType_BOOL = 4,
   DType_MIN = DType_FLOAT32,
-  DType_MAX = DType_INT32
+  DType_MAX = DType_BOOL
 };
 
-inline const DType (&EnumValuesDType())[2] {
+inline const DType (&EnumValuesDType())[5] {
   static const DType values[] = {
     DType_FLOAT32,
-    DType_INT32
+    DType_FLOAT64,
+    DType_INT32,
+    DType_INT64,
+    DType_BOOL
   };
   return values;
 }
 
 inline const char * const *EnumNamesDType() {
-  static const char * const names[3] = {
+  static const char * const names[6] = {
     "FLOAT32",
+    "FLOAT64",
     "INT32",
+    "INT64",
+    "BOOL",
     nullptr
   };
   return names;
 }
 
 inline const char *EnumNameDType(DType e) {
-  if (::flatbuffers::IsOutRange(e, DType_FLOAT32, DType_INT32)) return "";
+  if (::flatbuffers::IsOutRange(e, DType_FLOAT32, DType_BOOL)) return "";
   const size_t index = static_cast<size_t>(e);
   return EnumNamesDType()[index];
 }
